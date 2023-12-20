@@ -51,7 +51,7 @@ app.post("/api/v1/ai-completions/description", (req, res) =>
     })
 );
 
-app.post("/api/v1/ai-completions/:score", async (req, res) =>
+app.post("/api/v1/ai-completions/score", async (req, res) =>
   fetch("https://api.openai.com/v1/completions", {
     method: "POST",
     headers: {
@@ -70,7 +70,7 @@ app.post("/api/v1/ai-completions/:score", async (req, res) =>
         Anything above 10 is elite world-record level stuff so go crazy with praise. 
         Overall, your task is to praise/criticise the player based on their score. 
         Act like a sarcastic know-it-all if they are bad, but congratulate them if they do well.
-         Your answer must be less than 20 words. The player's score was ${req.params.score}.`,
+         Your answer must be less than 20 words. The player's score was ${req.body.data}.`,
       temperature: 1.2,
       max_tokens: 500,
       top_p: 1.0,
@@ -86,11 +86,22 @@ app.post("/api/v1/ai-completions/:score", async (req, res) =>
       })
     )
     .catch((err) => {
-      debugger;
       return res.status(200).json({ success: false, error: err });
     })
 );
-
+app.post("/api/v1/photo", async (req, res) =>
+  fetch(
+    `https://api.unsplash.com/search/photos?page=1&query=${req.body.data}&orientation=landscape&client_id=${process.env.UNSPLASH_KEY}`
+  )
+    .then((res) =>
+      res.ok
+        ? res.json()
+        : res.status(200).json({ success: false, error: "No photos found" })
+    )
+    .then(({ results }) =>
+      res.status(200).json({ success: true, data: results.at(0) })
+    )
+);
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
