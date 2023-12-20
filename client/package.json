@@ -1,13 +1,13 @@
 {
   "name": "project",
   "dependencies": {
+    "openai": "4.20.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "openai": "4.20.1"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "vite": "latest",
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "vite": "latest"
   },
   "scripts": {
     "start": "vite",
