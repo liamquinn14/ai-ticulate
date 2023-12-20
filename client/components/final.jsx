@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import config from "../configs/config";
+
+const { SERVER_URL } = config;
 
 export default function Final({
   gameState,
@@ -31,12 +34,16 @@ export default function Final({
 
   useEffect(() => {
     async function callOpenAIAPI() {
-      await fetch(`${REACT_APP_SERVER_URL}/${score}`, {
+      await fetch(`${SERVER_URL}ai-completions/score`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: score,
+        }),
       })
-        .then((data) => {
-          return data.json();
-        })
+        .then((data) => data.json())
         .then(({ success, data }) => {
           if (!success) return; //TODO handle error from server
           setFeedback(data.trim().toUpperCase()); // Positive or negative

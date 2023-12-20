@@ -53,6 +53,7 @@ export default function Answer({
           data: description,
         }),
       })
+        .then((data) => data.json())
         .then(({ success, data }) => {
           if (!success) return; //TODO handle error
           setGuess(
