@@ -1,0 +1,27 @@
+####################
+# Production Image #
+####################
+FROM node:lts-alpine
+
+# Create working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy files
+COPY . .
+
+# Environment variables
+COPY .env.example .env
+
+# Use the node user instead of root
+USER node
+
+# Expose port
+EXPOSE 8080 8080
+
+# Start the app
+CMD ["node", "app.js"]
+

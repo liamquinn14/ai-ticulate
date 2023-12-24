@@ -1,0 +1,29 @@
+# Docker files
+dockerfile
+.dockerignore
+
+# Github files
+.github
+.gitignore
+**/.gitkeep
+**/README.md
+
+# docs
+doc
+
+# build
+dist
+
+# Node modules
+node_modules
+
+# Tests
+test
+
+# Environment variables
+.env*
+!.env.example
+
+# Misc
+eslintrc.js
+.prettierrc
