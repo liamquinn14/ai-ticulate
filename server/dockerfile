@@ -7,11 +7,12 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # Install dependencies
-COPY package*.json ./
-RUN npm install
+COPY ./server/package*.json .
+RUN npm ci
 
+RUN echo "ls -la"
 # Copy files
-COPY . .
+COPY ./server .
 
 # Environment variables
 COPY ./server/.env.example .env

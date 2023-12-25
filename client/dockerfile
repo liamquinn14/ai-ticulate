@@ -22,6 +22,4 @@ RUN mv node_modules ./dist
 # Use the node user instead of root
 USER node
 
-# See dist folder
-CMD ["ls", "-l", "/app/dist"]
 
