@@ -8,13 +8,13 @@ WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy files
 COPY . .
 
 # Environment variables
-COPY .env.example .env
+COPY ./server/.env.example .env
 
 # Use the node user instead of root
 USER node
