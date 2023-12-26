@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: infrastructure/nginx/dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: server/dockerfile
+    expose:
+      - "8080"

@@ -1,0 +1,25 @@
+FROM node:lts-alpine
+
+# Create working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy files
+COPY . .
+
+# Configure file
+COPY ./configs/config.production.js ./configs/config.js
+
+# Build the app
+RUN npm run build
+
+# Move node_modules to dist
+RUN mv node_modules ./dist
+
+# Use the node user instead of root
+USER node
+
+
