@@ -9,7 +9,7 @@ const app = express();
 //configure cors middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "*",
   })
 );
 
@@ -102,4 +102,4 @@ app.post("/api/v1/photo", async (req, res) =>
       res.status(200).json({ success: true, data: results.at(0) })
     )
 );
-app.listen(8080, () => console.log(`Server running on port 8080`));
+app.listen(80, () => console.log(`Server running on port 80`));

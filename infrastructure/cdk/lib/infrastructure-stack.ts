@@ -23,8 +23,13 @@ export class InfrastructureStack extends cdk.Stack {
     const vpc = new ec2.Vpc(this, `${props.stackName}-vpc`, {
       cidr: "10.0.0.0/16",
       natGateways: 0,
+      //make the ec2 instance public
       subnetConfiguration: [
-        { name: "public", cidrMask: 24, subnetType: ec2.SubnetType.PUBLIC },
+        {
+          cidrMask: 24,
+          name: "public",
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
       ],
     });
     /**

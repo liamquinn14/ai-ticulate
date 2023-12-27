@@ -2,17 +2,13 @@ version: "3"
 
 services:
   nginx:
-    build:
-      context: .
-      dockerfile: infrastructure/nginx/dockerfile
+    image: kyleheat/ai-ticulate:nginx
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - backend
 
   backend:
-    build:
-      context: .
-      dockerfile: server/dockerfile
+    image: kyleheat/ai-ticulate:server
     expose:
-      - "8080"
+      - "80"
