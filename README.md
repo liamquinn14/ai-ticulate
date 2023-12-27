@@ -25,7 +25,7 @@ AI-TICULATE is a game where you play charades against an AI. The AI will try to 
     npm install 
    ```
 2. Create a .env file and copy the contents of .env.example into it.
-3.  Run the server in development mode on http://localhost:8080
+3.  Run the server in development mode on http://localhost:80
    ```bash
     npm run dev
    ```
