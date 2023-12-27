@@ -1,50 +1,89 @@
-# Welcome to your CDK TypeScript project
+# Infrastructure for AI-Ticulate
 
-This is a blank project for CDK development with TypeScript.
+## Prerequisites
+- AWS CLI https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+- AWS CDK https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html
+- Docker https://docs.docker.com/get-docker/
+- Docker Compose https://docs.docker.com/compose/install/
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Infrastructure overview
+![Infrastructure overview](./docs/infrastructure.jpeg)
+#### AWS
+- VPC public subnet 
+- EC2 Instance with docker and docker-compose installed
+#### Docker hub
+- Repository https://hub.docker.com/repository/docker/kyledeveloper321306/ai-ticulate/general
 
-## Useful commands
+### Structure
+A VPC hosting a EC2 instance which has a public route to a containerized nginx reverse proxy which servers a React client and a express api accessing OpenAI api for chat generative completion. 
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+## Deploying the infrastructure
+### Running the CDK
+- Must have the AWS CLI installed and configured with credentials
 
-## Building the docker images
+- Configure AWS CLI
 ```bash
-docker build --platform linux/amd64 -t kyleheat/ai-ticulate
+  aws configure
+```
+- Deploy the CDK
+```bash
+cd infrastructure/cdk
+npm install
+cdk deploy
 ```
 
-
-## Installing Docker on EC2 Ubuntu
+### Setting up the EC2 instance
+- SSH into the EC2 instance
 ```bash
-# Add Docker's official GPG key:
+ssh -i "ai-ticulate.pem" ubuntu@{ec2-instance-public-ip}
+```
+
+### Install Dependencies on EC2 instance
+##### Installing Docker on EC2 Ubuntu
+```bash
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | 
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo docker run hello-world
-
-sudo docker login -u kyleheat 
+sudo docker run hello-world # test docker
+```
+##### Login to Docker Hub
+```bash
+sudo docker login -u kyleheat #password can be found in DOCKER_PASSWORD in .env.example
+```
+## Pull the projects docker images
+```bash
 sudo docker pull kyleheat/ai-ticulate --all-tags
-
-sudo apt install micro
-micro docker-compose.yaml #copy contents of docker-compose.yaml from github
-
+```
 ## Install docker-compose
+```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version
+docker-compose --version # test docker-compose
+```
+## Create docker-compose.yaml
+```bash
+sudo apt install micro
+micro docker-compose.yaml #copy contents of docker-compose.yaml from github
+```
+## Run docker-compose
+```bash
+sudo docker-compose up -d
+```
+## Stop docker-compose
+```bash
+sudo docker-compose down
+```
+
+## Generating Docker image
+#### Building the docker images
+```bash
+docker build --platform linux/amd64 -t kyleheat/ai-ticulate:{tag}
+```
+#### Pushing the docker images
+```bash
+docker push kyleheat/ai-ticulate:{tag}
 ```
