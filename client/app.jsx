@@ -102,12 +102,11 @@ export default function App() {
       )}
       {gameState !== "splash" && gameState !== "final" ? (
         <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black"
+          className="rounded-full bg-purple-100 text-purple-800 font-black absolute"
           style={{
             margin: "1rem",
             padding: "1rem",
-            position: "absolute",
-            top: "11vh",
+            top: "8vh",
             right: 0,
           }}
         >

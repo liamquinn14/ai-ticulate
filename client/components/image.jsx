@@ -60,14 +60,17 @@ export default function Image({
       }
     };
     if (!!guess) fetchRequest();
+  }, [guess]);
+
+  useEffect(() => {
     if (guess !== newPrompt) {
       if (description === "") {
-        setTimeLeft((prevTimeLeft) => prevTimeLeft - 5);
+          setTimeLeft(prevTimeLeft => prevTimeLeft - 5)
       } else if (description.split(" ").join("").split("").length < 5) {
-        setTimeLeft((prevTimeLeft) => prevTimeLeft - 5);
+          setTimeLeft(prevTimeLeft => prevTimeLeft - 5)
       }
-    }
-  }, [guess]);
+  }
+  }, [])
 
   if (error) {
     charactersLeft > 0 ? (
