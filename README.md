@@ -47,9 +47,10 @@ First check the status of your files
 - `git status` this will show you the files you have changed. They will be red if they are not stagged and green if they are stagged
 - `git add -p` This will show you each file and the changes that have occured, you can say yes or no if you want to stage these changes. *note that new files will not be included*
 - `git add .` This will stage all your changes  
-- 'git commit -m "your message here"` This will commit the staged changes to your local branch. Your commit message must be in quotes *note that if you miss out your -m "message" then you will end up in what ever your default text editor is (maybe vim) and sometimes hard to get out*
+- `git commit -m "your message here"` This will commit the staged changes to your local branch. Your commit message must be in quotes *note that if you miss out your -m "message" then you will end up in what ever your default text editor is (maybe vim) and sometimes hard to get out*
 #### Pushing to remote repo
 ###### First time pushing to a remote origin
 - `git push -u origin name-of-your-branch` this will set a upstream to the remote branch which most likely doesnt exist so will also create one.
+###### Second time pushing to a remote origin
 - `git push` this can be used onces an up stream to the remote branch has been established
 - `git push --force-with-lease` This maybe required at times when others have cloned your branch
