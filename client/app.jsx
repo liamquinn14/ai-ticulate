@@ -3,6 +3,7 @@ import Splash from "./components/splash.jsx";
 import Prompt from "./components/prompt.jsx";
 import Answer from "./components/answer.jsx";
 import Final from "./components/final.jsx";
+import { Header } from "./components/header.jsx";
 
 export default function App() {
   const [timeLeft, setTimeLeft] = useState(60);
@@ -74,48 +75,17 @@ export default function App() {
     top: 0,
     right: 0,
   };
-
+  const canShowScore = gameState !== "splash" && gameState !== "final";
   return (
-    <div>
-      {gameState !== "splash" && timeLeft > 0 && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black"
-          style={
-            timeLeft > 9 ? timerStyles : { ...timerStyles, ...lowTimerStyles }
-          }
-        >
-          {timeLeft} seconds
-        </div>
-      ) : (
-        ""
-      )}
-      {gameState !== "splash" && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black"
-          style={scorePositionStyles}
-        >
-          {" "}
-          Score: {score}{" "}
-        </div>
-      ) : (
-        ""
-      )}
-      {gameState !== "splash" && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black absolute"
-          style={{
-            margin: "1rem",
-            padding: "1rem",
-            top: "8vh",
-            right: 0,
-          }}
-        >
-          {" "}
-          High Score: {record}{" "}
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="grid place-content-center place-items-center h-screen font-mono bg-purple-400">
+      <Header
+        canShowTimer={timeLeft > 0 && gameState && canShowScore}
+        canShowScore={canShowScore}
+        canShowHighScore={canShowScore}
+        timeLeft={timeLeft}
+        score={score}
+        record={record}
+      />
 
       {gameState === "splash" && (
         <Splash gameState={gameState} setGameState={setGameState} />

@@ -84,28 +84,31 @@ export default function Answer({
   }, [guess]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h4 className="p-2 m-1 text-xl font-bold text-purple-100">
-        {" "}
-        The AI guesses...{" "}
-      </h4>
-      <h5
-        className="p-2 m-1 text-2xl font-bold text-purple-900 bg-purple-200"
-        style={
-          guess.length > 60
-            ? { fontSize: "0.9rem" }
-            : guess.length > 30
-            ? { fontSize: "1.25rem" }
-            : {}
-        }
-      >
-        {" "}
-        {description.toUpperCase().includes(newPrompt)
-          ? "CHEAT! YOU'VE LOST ALL OF YOUR POINTS!"
-          : description.toUpperCase() === ""
-          ? "OOH A SKIP? 5 SECONDS LOST!"
-          : guess}{" "}
-      </h5>
+    <div className="grid place-items-center gap-3 md:gap-10 ">
+      <div>
+        <h4 className="p-2 m-1 text-3xl md:text-5xl font-bold text-purple-100">
+          The AI guesses...
+        </h4>
+      </div>
+      <div className="grid place-items-center">
+        <h5 className="p-2 m-1 text-lg md:text-2xl md:w-1/2 text-center font-bold text-purple-900 bg-purple-200">
+          {description.toUpperCase().includes(newPrompt)
+            ? "CHEAT! YOU'VE LOST ALL OF YOUR POINTS!"
+            : description.toUpperCase() === ""
+            ? "OOH A SKIP? 5 SECONDS LOST!"
+            : guess}
+        </h5>
+        {description.length > 0 && guess && newPrompt !== guess && (
+          <h2 className="rounded-md py-1 px-2 m-2 text-red-100 bg-red-600 font-black">
+            Incorrect answer! Unlucky!
+          </h2>
+        )}
+        {guess.includes(newPrompt) && (
+          <h2 className="rounded-md py-1 px-2 m-2 bg-green-700 text-green-100 font-black">
+            Well Done! Point Scored!
+          </h2>
+        )}
+      </div>
       <Image
         timeLeft={timeLeft}
         setTimeLeft={setTimeLeft}
@@ -120,22 +123,6 @@ export default function Answer({
         setDescription={setDescription}
         newPrompt={newPrompt}
       />
-      {guess.includes(newPrompt) && (
-        <h2 className="rounded-md py-1 px-2 m-2 bg-green-700 text-green-100 font-black">
-          {" "}
-          Well Done! Point Scored!{" "}
-        </h2>
-      )}
-      {description.length > 0 && guess && newPrompt !== guess && (
-        <h2 className="rounded-md py-1 px-2 m-2 text-red-100 bg-red-600 font-black">
-          {" "}
-          Incorrect answer! Unlucky!{" "}
-        </h2>
-      )}
-      <h2 className="rounded-md bg-purple-200 py-1 px-2 m-1 text-purple-800 font-black">
-        {" "}
-        Score: {score}{" "}
-      </h2>
     </div>
   );
 }
