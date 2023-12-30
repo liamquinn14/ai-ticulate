@@ -76,109 +76,111 @@ export default function App() {
   };
 
   return (
-    <div>
-      {gameState !== "splash" && timeLeft > 0 && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black"
-          style={
-            timeLeft > 9 ? timerStyles : { ...timerStyles, ...lowTimerStyles }
-          }
-        >
-          {timeLeft} seconds
-        </div>
-      ) : (
-        ""
-      )}
-      {gameState !== "splash" && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black"
-          style={scorePositionStyles}
-        >
-          {" "}
-          Score: {score}{" "}
-        </div>
-      ) : (
-        ""
-      )}
-      {gameState !== "splash" && gameState !== "final" ? (
-        <div
-          className="rounded-full bg-purple-100 text-purple-800 font-black absolute"
-          style={{
-            margin: "1rem",
-            padding: "1rem",
-            top: "8vh",
-            right: 0,
-          }}
-        >
-          {" "}
-          High Score: {record}{" "}
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div>
+        {gameState !== "splash" && timeLeft > 0 && gameState !== "final" ? (
+          <div
+            className="rounded-full bg-purple-100 text-purple-800 font-black"
+            style={
+              timeLeft > 9 ? timerStyles : { ...timerStyles, ...lowTimerStyles }
+            }
+          >
+            {timeLeft} seconds
+          </div>
+        ) : (
+          ""
+        )}
+        {gameState !== "splash" && gameState !== "final" ? (
+          <div
+            className="rounded-full bg-purple-100 text-purple-800 font-black"
+            style={scorePositionStyles}
+          >
+            {" "}
+            Score: {score}{" "}
+          </div>
+        ) : (
+          ""
+        )}
+        {gameState !== "splash" && gameState !== "final" ? (
+          <div
+            className="rounded-full bg-purple-100 text-purple-800 font-black absolute"
+            style={{
+              margin: "1rem",
+              padding: "1rem",
+              top: "8vh",
+              right: 0,
+            }}
+          >
+            {" "}
+            High Score: {record}{" "}
+          </div>
+        ) : (
+          ""
+        )}
 
-      {gameState === "splash" && (
-        <Splash gameState={gameState} setGameState={setGameState} />
-      )}
+        {gameState === "splash" && (
+          <Splash gameState={gameState} setGameState={setGameState} />
+        )}
 
-      {gameState === "prompt" && (
-        <Prompt
-          timeLeft={timeLeft}
-          setTimeLeft={setTimeLeft}
-          gameState={gameState}
-          setGameState={setGameState}
-          description={description}
-          setDescription={setDescription}
-          newPrompt={newPrompt}
-          setNewPrompt={setNewPrompt}
-          currentCharacters={currentCharacters}
-          setCurrentCharacters={setCurrentCharacters}
-          charactersLeft={charactersLeft}
-          setCharactersLeft={setCharactersLeft}
-          endRoundChars={endRoundChars}
-          setEndRoundChars={setEndRoundChars}
-          score={score}
-        />
-      )}
+        {gameState === "prompt" && (
+          <Prompt
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            gameState={gameState}
+            setGameState={setGameState}
+            description={description}
+            setDescription={setDescription}
+            newPrompt={newPrompt}
+            setNewPrompt={setNewPrompt}
+            currentCharacters={currentCharacters}
+            setCurrentCharacters={setCurrentCharacters}
+            charactersLeft={charactersLeft}
+            setCharactersLeft={setCharactersLeft}
+            endRoundChars={endRoundChars}
+            setEndRoundChars={setEndRoundChars}
+            score={score}
+          />
+        )}
 
-      {gameState === "answer" && (
-        <Answer
-          timeLeft={timeLeft}
-          setTimeLeft={setTimeLeft}
-          score={score}
-          setScore={setScore}
-          gameState={gameState}
-          setGameState={setGameState}
-          description={description}
-          setDescription={setDescription}
-          newPrompt={newPrompt}
-          setNewPrompt={setNewPrompt}
-          charactersLeft={charactersLeft}
-          record={record}
-          setRecord={setRecord}
-          recordBeat={recordBeat}
-          setRecordBeat={setRecordBeat}
-        />
-      )}
+        {gameState === "answer" && (
+          <Answer
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            score={score}
+            setScore={setScore}
+            gameState={gameState}
+            setGameState={setGameState}
+            description={description}
+            setDescription={setDescription}
+            newPrompt={newPrompt}
+            setNewPrompt={setNewPrompt}
+            charactersLeft={charactersLeft}
+            record={record}
+            setRecord={setRecord}
+            recordBeat={recordBeat}
+            setRecordBeat={setRecordBeat}
+          />
+        )}
 
-      {gameState === "final" && (
-        <Final
-          score={score}
-          setScore={setScore}
-          gameState={gameState}
-          setGameState={setGameState}
-          charactersLeft={charactersLeft}
-          setCharactersLeft={setCharactersLeft}
-          timeLeft={timeLeft}
-          setTimeLeft={setTimeLeft}
-          endRoundChars={endRoundChars}
-          setEndRoundChars={setEndRoundChars}
-          record={record}
-          setRecord={setRecord}
-          recordBeat={recordBeat}
-          setRecordBeat={setRecordBeat}
-        />
-      )}
+        {gameState === "final" && (
+          <Final
+            score={score}
+            setScore={setScore}
+            gameState={gameState}
+            setGameState={setGameState}
+            charactersLeft={charactersLeft}
+            setCharactersLeft={setCharactersLeft}
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            endRoundChars={endRoundChars}
+            setEndRoundChars={setEndRoundChars}
+            record={record}
+            setRecord={setRecord}
+            recordBeat={recordBeat}
+            setRecordBeat={setRecordBeat}
+          />
+        )}
+      </div>
     </div>
   );
 }

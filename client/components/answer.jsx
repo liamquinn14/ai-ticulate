@@ -84,7 +84,7 @@ export default function Answer({
   }, [guess]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <>
       <h4 className="p-2 m-1 text-xl font-bold text-purple-100">
         {" "}
         The AI guesses...{" "}
@@ -136,6 +136,6 @@ export default function Answer({
         {" "}
         Score: {score}{" "}
       </h2>
-    </div>
+    </>
   );
 }

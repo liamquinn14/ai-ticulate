@@ -67,7 +67,7 @@ export default function Final({
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <>
       <h1 className="p-2 m-2 text-6xl font-black text-purple-100">
         {" "}
         FINAL SCORE{" "}
@@ -99,6 +99,6 @@ export default function Final({
         {" "}
         PLAY AGAIN{" "}
       </button>
-    </div>
+    </>
   );
 }

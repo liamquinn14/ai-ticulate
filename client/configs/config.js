@@ -1,3 +1,3 @@
 export default {
-  SERVER_URL: "http://localhost:80/api/v1/",
+  SERVER_URL: "http://localhost:3000/api/v1/",
 };
