@@ -65,21 +65,21 @@ export default function Image({
   useEffect(() => {
     if (guess !== newPrompt) {
       if (description === "") {
-          setTimeLeft(prevTimeLeft => prevTimeLeft - 5)
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 5);
       } else if (description.split(" ").join("").split("").length < 5) {
-          setTimeLeft(prevTimeLeft => prevTimeLeft - 5)
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 5);
       }
-  }
-  }, [])
+    }
+  }, []);
 
-  if (error) {
+  if (error || !res) {
+    //So confused by what this actually does but when I tried to delete it the app broke
     charactersLeft > 0 ? (
       <button
         className="px-4 py-2 m-4 text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
         onClick={nextQuestion}
       >
-        {" "}
-        NEXT QUESTION{" "}
+        NEXT QUESTION
       </button>
     ) : (
       ""
@@ -89,47 +89,24 @@ export default function Image({
         onClick={forfeit}
         className="px-4 py-2 m-4 text-red-100 bg-red-600 hover:bg-red-700 font-black shadow-md rounded"
       >
-        {" "}
-        VIEW FINAL SCORE{" "}
-      </button>
-    );
-  }
-
-  if (!res) {
-    charactersLeft > 0 ? (
-      <button
-        className="px-4 py-2 m-4 text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
-        onClick={nextQuestion}
-      >
-        {" "}
-        NEXT QUESTION{" "}
-      </button>
-    ) : (
-      ""
-    );
-    charactersLeft < 1 && (
-      <button
-        onClick={forfeit}
-        className="px-4 py-2 m-4 text-red-100 bg-red-600 hover:bg-red-700 font-black shadow-md rounded"
-      >
-        {" "}
-        VIEW FINAL SCORE{" "}
+        VIEW FINAL SCORE
       </button>
     );
   }
 
   return (
     <>
+      {isLoading && <h1 className="text-4xl text-purple-100">Loading...</h1>}
       {res && (
         <img
-          className="m-4 w-1/3 max-h-1/4"
+          className="m-4 w-2/3 md:w-1/3 md:max-h-1/4"
           src={res.urls.regular}
           alt={res.alt_description}
         />
       )}
       {charactersLeft > -1 ? (
         <button
-          className="px-4 py-2 m-3 text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
+          className="text-xl px-3 py-1 md:text-3xl md:px-6 md:py-3  text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
           onClick={charactersLeft > 1 ? nextQuestion : forfeit}
           ref={newInputRef}
           onKeyPress={handleKeyPress}

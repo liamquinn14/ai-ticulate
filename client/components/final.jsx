@@ -31,7 +31,6 @@ export default function Final({
   }
 
   const [feedback, setFeedback] = React.useState("");
-
   useEffect(() => {
     async function callOpenAIAPI() {
       await fetch(`${SERVER_URL}ai-completions/score`, {
@@ -65,39 +64,38 @@ export default function Final({
     document.body.classList.add("bg-purple-400");
     setRecordBeat(false);
   }
-
   return (
     <>
-      <h1 className="p-2 m-2 text-6xl font-black text-purple-100">
-        {" "}
-        FINAL SCORE{" "}
-      </h1>
-      <h2 className="p-2 m-2 text-2xl font-black text-purple-900 bg-purple-200">
-        {" "}
-        You scored: {score}
-      </h2>
+      <div className="m-4">
+        <h1 className="text-5xl font-black text-purple-100 p-5">FINAL SCORE</h1>
+        <div className="pt-5">
+          <h2 className="p-2 w-1/6 mx-auto text-center font-black text-purple-900 bg-purple-200 rounded-full text-4xl">
+            {score}
+          </h2>
+        </div>
+      </div>
       {recordBeat && (
-        <h2 className="p-2 m-2 text-2xl font-black bg-green-700 text-green-100">
-          {" "}
-          THAT'S A NEW HIGH SCORE!{" "}
+        <h2 className="p-2 m-2 text-xl font-black bg-green-700 text-green-100">
+          THAT'S A NEW HIGH SCORE!
         </h2>
       )}
-      <h4 className="p-2 m-1 text-2xl font-bold italic text-purple-100">
-        {" "}
-        The AI says...{" "}
-      </h4>
-      <h2 className="p-2 m-2 text-2xl font-black text-purple-100 w-1/2 flex-wrap text-center">
-        {" "}
-        {feedback}{" "}
-      </h2>
+
+      <div className="p-5">
+        <h4 className="text-4xl text-center p-2 font-bold italic text-purple-200">
+          The AI says...
+        </h4>
+        <h2 className="text-lg text-purple-100 w-11/12 md:w-1/2 mx-auto">
+          {feedback}
+        </h2>
+      </div>
+
       <button
         onClick={startGame}
         ref={newestInputRef}
         onKeyPress={handleKeyPress}
-        className="px-4 py-2 m-4 text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
+        className="px-4 py-2 text-lg m-4 text-purple-900 bg-purple-200 hover:bg-purple-300 font-black shadow-md rounded"
       >
-        {" "}
-        PLAY AGAIN{" "}
+        PLAY AGAIN
       </button>
     </>
   );

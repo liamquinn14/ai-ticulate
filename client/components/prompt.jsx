@@ -564,55 +564,60 @@ export default function Prompt({
   }
 
   return (
-    <>
-      <h4 className="p-2 m-1 text-xl font-bold text-purple-100">
-        {" "}
-        Your prompt is...{" "}
-      </h4>
-      <h5 className="p-2 m-1 text-xl font-bold text-purple-900 bg-purple-200">
-        {newPrompt}{" "}
-      </h5>
-      <h4 className="p-2 m-1 text-xl font-bold text-purple-100">
-        {" "}
-        Describe the prompt word with as few characters as possible.{" "}
-      </h4>
-      <input
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
-        ref={inputRef}
-        placeholder="Write your description here..."
-        className="p-3 pl-4 m-1 w-3/5"
-      />
-      <div
-        className="m-1 flex flex-row w-1/2 justify-between items-center"
-        id="under-input"
-      >
-        <p className="text-sm text-purple-100 font-semibold">
-          {currentCharacters} characters long
-        </p>
-        <p
-          className="text-sm text-purple-100 font-semibold"
-          style={charactersLeft < 0 ? { color: "#dc2626" } : {}}
-        >
-          {charactersLeft} characters remaining
-        </p>
+    <div className="grid place-items-center gap-8 md:gap-16">
+      <div className="text-center py-5">
+        <h4 className="p-2 m-1 text-3xl md:text-5xl font-bold text-purple-100">
+          Your prompt is...
+        </h4>
+        <div className="inline-block w-1/2 mx-auto">
+          <h5 className="p-2 m-1 text-1xl md:text-3xl text-center font-bold text-purple-900 bg-purple-200 rounded-xl">
+            {newPrompt}
+          </h5>
+        </div>
       </div>
-      {charactersLeft >= 0 && (
+      <div>
+        <h4 className="p-2 m-1 md:w-4/6 mx-auto text-1xl md:text-2xl font-bold text-purple-100">
+          Describe the prompt word with as few characters as possible.{" "}
+        </h4>
+        <div className="text-center">
+          <input
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            ref={inputRef}
+            placeholder="Write your description here..."
+            className="p-3 text-center pl-4 m-1 w-11/12 md:w-3/5"
+          />
+        </div>
+        <div
+          className="p-1 flex w-11/12 md:w-3/5 justify-between items-center mx-auto"
+          id="under-input"
+        >
+          <span className="text-sm text-purple-100 font-semibold">
+            {currentCharacters} characters long
+          </span>
+          <span
+            className="text-sm text-purple-100 font-semibold"
+            style={charactersLeft < 0 ? { color: "#dc2626" } : {}}
+          >
+            {charactersLeft} characters remaining
+          </span>
+        </div>
+      </div>
+      <div>
+        <button
+          onClick={forfeit}
+          className="m-4 text-red-100 bg-red-600 hover:bg-red-700 font-black shadow-md rounded text-base md:text-lg px-3 md:px-4 py-2 md:py-2"
+        >
+          {charactersLeft >= 0 ? "FORFEIT" : "FINISH GAME"}
+        </button>
         <button
           onClick={submit}
-          className="px-4 py-2 m-4 text-purple-900 bg-purple-200 shadow-md rounded hover:bg-purple-300 font-black"
+          disabled={description.length === 0}
+          className="m-4 text-purple-900 bg-purple-200 shadow-md rounded hover:bg-purple-300 font-black text-base md:text-lg px-3 md:px-4 py-2 md:py-2"
         >
-          {" "}
-          SUBMIT{" "}
+          SUBMIT
         </button>
-      )}
-      <button
-        onClick={forfeit}
-        className="px-4 py-2 m-4 text-red-100 bg-red-600 hover:bg-red-700 font-black shadow-md rounded"
-      >
-        {" "}
-        {charactersLeft >= 0 ? "FORFEIT" : "FINISH GAME"}{" "}
-      </button>
-    </>
+      </div>
+    </div>
   );
 }
