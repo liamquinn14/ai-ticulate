@@ -20,9 +20,6 @@ COPY .env.example .env
 # Use the node user instead of root
 USER node
 
-# Expose port
-EXPOSE 80
-
 # Start the app
 CMD ["node", "app.js"]
 

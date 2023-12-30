@@ -1,14 +1,7 @@
 version: "3"
 
 services:
-  nginx:
-    image: kyleheat/ai-ticulate:nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
   backend:
     image: kyleheat/ai-ticulate:server
-    expose:
-      - "80"
+    ports:
+      - "3000:80"
